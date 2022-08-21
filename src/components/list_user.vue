@@ -282,6 +282,21 @@ import axios from 'axios';
         this.editedIndex = this.desserts.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialogDelete = true
+        axios
+                    .post('http://localhost/SupprimerLivre.php', {
+                    NumLivre: this.editedItem.NumLivre,
+                    Titre: this.editedItem.Titre,
+                    Auteur: this.editedItem.Auteur,
+                    Date_edition: this.editedItem.Date_edition,
+                    Disponibilité: this.editedItem.Disponibilité,
+                    Quantité: this.editedItem.Quantité
+                    })
+                    .then(function (response) {
+                    console.log(response);
+                    })
+                    .catch(function (error) {
+                    console.log(error);
+                    });
       },
 
       deleteItemConfirm () {
