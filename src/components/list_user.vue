@@ -118,6 +118,13 @@
               <v-btn
                 color="blue darken-1"
                 text
+                @click="edit"               
+              >
+                Edit
+              </v-btn>
+              <v-btn
+                color="blue darken-1"
+                text
                 @click="close"
               >
                 Cancel
@@ -308,6 +315,31 @@ import axios from 'axios';
         }
         axios
                     .post('http://localhost/ajouterLivre.php', {
+                    NumLivre: this.editedItem.NumLivre,
+                    Titre: this.editedItem.Titre,
+                    Auteur: this.editedItem.Auteur,
+                    Date_edition: this.editedItem.Date_edition,
+                    Disponibilité: this.editedItem.Disponibilité,
+                    Quantité: this.editedItem.Quantité
+                    })
+                    .then(function (response) {
+                    console.log(response);
+                    })
+                    .catch(function (error) {
+                    console.log(error);
+                    });
+        this.close()
+      },
+      edit (e) {
+        e.preventDefault();
+        console.log("Data sended!!!");
+        if (this.editedIndex > -1) {
+          Object.assign(this.desserts[this.editedIndex], this.editedItem)
+        } else {
+          this.desserts.push(this.editedItem)
+        }
+        axios
+                    .post('http://localhost/modiffierLivre.php', {
                     NumLivre: this.editedItem.NumLivre,
                     Titre: this.editedItem.Titre,
                     Auteur: this.editedItem.Auteur,
